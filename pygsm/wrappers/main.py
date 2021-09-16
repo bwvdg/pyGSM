@@ -68,6 +68,7 @@ def parse_arguments(verbose=True):
     parser.add_argument('-xTB_Hamiltonian',type=str,default='GFN2-xTB', help='xTB hamiltonian', choices=["GFN2-xTB","GFN1-xTB"] ,required=False)
     parser.add_argument('-xTB_accuracy',type=float,default=1.0, help='xTB accuracy',required=False)
     parser.add_argument('-xTB_electronic_temperature',type=float,default=300.0, help='xTB electronic temperature',required=False)
+    parser.add_argument('-xTB_solvent',type=str,default=None,help='xTB solvent',required=False)
     parser.add_argument('-xyz_output_format',type=str,default="molden",help='Format of the produced XYZ files',required=False)
     parser.add_argument('-linesearch', type=str, default='NoLineSearch', help='default: %(default)s',
                         choices=['NoLineSearch', 'backtrack'])
@@ -284,7 +285,10 @@ def create_lot(inpfileq: dict, geom):
             xTB_Hamiltonian=inpfileq['xTB_Hamiltonian'],
             xTB_accuracy=inpfileq['xTB_accuracy'],
             xTB_electronic_temperature=inpfileq['xTB_electronic_temperature'],
-                )
+            xTB_solvent=inpfileq['xTB_solvent'],
+            **lot_options
+        )
+
     else:
         est_package = importlib.import_module("pygsm.level_of_theories." + lot_name.lower())
         lot_class = getattr(est_package, lot_name)
