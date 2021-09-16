@@ -41,8 +41,8 @@ class xTB_lot(Lot):
 
         calc.set_accuracy(self.xTB_accuracy)
         calc.set_electronic_temperature(self.xTB_electronic_temperature)
-        if self.solvent is not None:
-            solvent = get_solvent(self.solvent)
+        if self.xTB_solvent is not None:
+            solvent = get_solvent(self.xTB_solvent)
             calc.set_solvent(solvent)
         
         calc.set_output('lot_jobs_{}.txt'.format(self.node_id))

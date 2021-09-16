@@ -173,13 +173,14 @@ class Lot(object):
                 allowed_types=[float],
                 doc='xTB electronic_temperature'
                 )
+
         opt.add_option(
                 key='xTB_solvent',
                 value=None,
                 required=False,
-                allowed_type=[str],
+                allowed_types=[str],
                 doc='xTB solvent'
-
+                )
         Lot._default_options = opt
         return Lot._default_options.copy()
 
@@ -254,7 +255,7 @@ class Lot(object):
         self.xTB_Hamiltonian = self.options['xTB_Hamiltonian']
         self.xTB_accuracy = self.options['xTB_accuracy']
         self.xTB_electronic_temperature = self.options['xTB_electronic_temperature']
-        self.xTB_solvent = self.options['xTB_sovlent']
+        self.xTB_solvent = self.options['xTB_solvent']
 
         # Bools for running 
         self.hasRanForCurrentCoords =False

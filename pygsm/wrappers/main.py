@@ -161,6 +161,7 @@ def parse_arguments(verbose=True):
         'xTB_Hamiltonian': args.xTB_Hamiltonian,
         'xTB_accuracy': args.xTB_accuracy,
         'xTB_electronic_temperature': args.xTB_electronic_temperature,
+        'xTB_solvent': args.xTB_solvent,
 
         # PES
         'PES_type': args.pes_type,
@@ -282,11 +283,12 @@ def create_lot(inpfileq: dict, geom):
     if lot_name == "xTB_lot":
         return xTB_lot.from_options(
             geom=geom,
+            charge=inpfileq['charge'],
             xTB_Hamiltonian=inpfileq['xTB_Hamiltonian'],
             xTB_accuracy=inpfileq['xTB_accuracy'],
             xTB_electronic_temperature=inpfileq['xTB_electronic_temperature'],
             xTB_solvent=inpfileq['xTB_solvent'],
-            **lot_options
+            #**lot_options
         )
 
     else:
