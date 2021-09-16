@@ -280,6 +280,7 @@ def create_lot(inpfileq: dict, geom):
 
     if lot_name == "xTB_lot":
         return xTB_lot.from_options(
+            geom=geom,
             xTB_Hamiltonian=inpfileq['xTB_Hamiltonian'],
             xTB_accuracy=inpfileq['xTB_accuracy'],
             xTB_electronic_temperature=inpfileq['xTB_electronic_temperature'],
