@@ -45,8 +45,11 @@ class xTB_lot(Lot):
             solvent = get_solvent(self.xTB_solvent)
             calc.set_solvent(solvent)
         
+        print("calculating energy...")
         calc.set_output('lot_jobs_{}.txt'.format(self.node_id))
         res = calc.singlepoint()  # energy printed is only the electronic part
+        print("done! total energy: {}".format(res.get_energy()))
+
         calc.release_output()
      
         # energy in hartree

@@ -112,17 +112,17 @@ class base_optimizer(object):
 
         opt.add_option(
                 key='DMAX',
-                value=0.1,
+                value=0.3,
                 doc='step size controller, this changes depending on the performance of the optimization',
                 )
         opt.add_option(
                 key='DMIN',
-                value=0.0001,
+                value=0.075,
                 doc='step size controller, this changes depending on the performance of the optimization',
                 )
         opt.add_option(
                 key='abs_max_step',
-                value=0.4,
+                value=10.,
                 doc='the absolute max step allowed in optimization, a hard cutoff is required because converting internal coordinates becomes pathological'
                 )
 

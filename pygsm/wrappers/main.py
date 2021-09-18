@@ -209,6 +209,7 @@ def parse_arguments(verbose=True):
         'sigma': args.sigma,
 
         # newly added args that did not live here yet
+        'start_climb_immediately': args.start_climb_immediately,
         'only_climb': args.only_climb,
         'restart_file': args.restart_file,
         'no_climb': args.no_climb,

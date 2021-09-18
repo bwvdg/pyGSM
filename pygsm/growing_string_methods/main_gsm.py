@@ -1163,8 +1163,9 @@ class MainGSM(GSM):
             print('need to interpolate')
             #if self.interp_method=="DLC": TODO
             symbols = get_atoms(input_geoms[0])
-            old_xyzs = [ xyz_to_np( geom ) for geom in input_geoms ]
-            xyzs = redistribute(symbols,old_xyzs,self.nnodes,tol=2e-3*5)
+            #old_xyzs = [ xyz_to_np( geom ) for geom in input_geoms ]
+            xyzs = [ xyz_to_np( geom ) for geom in input_geoms ]
+            #xyzs = redistribute(symbols,old_xyzs,self.nnodes,tol=2e-3*5)
             geoms = [ np_to_xyz(input_geoms[0],xyz) for xyz in xyzs ]
             nstructs = len(geoms)
         else:
