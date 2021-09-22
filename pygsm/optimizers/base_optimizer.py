@@ -117,7 +117,7 @@ class base_optimizer(object):
                 )
         opt.add_option(
                 key='DMIN',
-                value=0.075,
+                value=0.02,
                 doc='step size controller, this changes depending on the performance of the optimization',
                 )
         opt.add_option(

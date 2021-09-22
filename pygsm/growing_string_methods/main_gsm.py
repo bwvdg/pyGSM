@@ -69,7 +69,7 @@ class MainGSM(GSM):
                     if self.nodes[self.nR-1].PES.lot.do_coupling:
                         opt_type='MECI'
                     else:
-                       opt_type='UNCONSTRAINED'
+                        opt_type='UNCONSTRAINED'
                     print(" optimizing last node")
                     self.optimizer[self.nR-1].conv_grms = self.CONV_TOL
                     print(self.optimizer[self.nR-1].conv_grms)
@@ -200,7 +200,8 @@ class MainGSM(GSM):
                 printcool(" There is no TS, turning off TS search")
                 rtype=0
                 self.climber=self.finder=self.find=self.climb=False
-                self.CONV_TOL=self.options['CONV_TOL']*5
+                #self.CONV_TOL=self.options['CONV_TOL']*5
+                self.CONV_TOL=self.options['CONV_TOL']
 
             #if self.has_intermediate(5) and rtype>0 and (self.climb or self.find):
             #    printcool(" THERE IS AN INTERMEDIATE, OPTIMIZE THE INTERMEDIATE AND TRY AGAIN")
@@ -1066,7 +1067,8 @@ class MainGSM(GSM):
         '''
 
         # Important the factor 5 here corresponds to the same convergence criteria in the TS optimizer 
-        TS_conv = self.CONV_TOL*5
+        #TS_conv = self.CONV_TOL*5
+        TS_conv = self.CONV_TOL
         # => Check if intermediate exists 
         #ALEX REMOVED CLIMB REQUIREMENT
         if self.has_intermediate(self.noise):
@@ -1160,7 +1162,7 @@ class MainGSM(GSM):
         nstructs=len(input_geoms)
 
         if nstructs != self.nnodes:
-            print('need to interpolate')
+            print('need to interpolate: loaded {} nodes but need {}'.format(nstructs, self.nnodes))
             #if self.interp_method=="DLC": TODO
             symbols = get_atoms(input_geoms[0])
             #old_xyzs = [ xyz_to_np( geom ) for geom in input_geoms ]
@@ -1224,7 +1226,8 @@ class MainGSM(GSM):
         print(" setting all interior nodes to active")
         for n in range(1,self.nnodes-1):
             self.active[n]=True
-            self.optimizer[n].conv_grms=self.CONV_TOL*2.5
+            #self.optimizer[n].conv_grms=self.CONV_TOL*2.5
+            self.optimizer[n].conv_grms=self.CONV_TOL
             self.optimizer[n].options['DMAX'] = 0.05
 
         return
@@ -1294,7 +1297,8 @@ class MainGSM(GSM):
         TSnode=self.TSnode
         for n in range(1,self.nnodes-1):
             if self.nodes[n] !=None:
-                self.optimizer[n].conv_grms = self.CONV_TOL*factor
+                #self.optimizer[n].conv_grms = self.CONV_TOL*factor
+                self.optimizer[n].conv_grms = self.CONV_TOL
                 self.optimizer[n].conv_gmax = self.options['CONV_gmax']*factor
                 self.optimizer[n].conv_Ediff = self.options['CONV_Ediff']*factor
                 if self.optimizer[n].converged:
