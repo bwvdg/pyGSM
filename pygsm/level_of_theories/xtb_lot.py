@@ -24,6 +24,11 @@ class xTB_lot(Lot):
 
         numbers = []
         E = elements.ElementData()
+
+        self.xTB_Hamiltonian = options.get('xTB_Hamiltonian', 'GFN2-xTB')
+        self.xTB_Hamiltonian = float(options.get('xTB_accuracy', 1.0))
+        self.xTB_Hamiltonian = float(options.get('xTB_electronic_temperature', 300))
+
         for a in manage_xyz.get_atoms(self.geom):
             elem = E.from_symbol(a)
             numbers.append(elem.atomic_num)

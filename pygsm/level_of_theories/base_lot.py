@@ -157,35 +157,11 @@ class Lot(object):
         )
 
         opt.add_option(
-                key='xTB_Hamiltonian',
-                value='GFN2-xTB',
-                required=False,
-                allowed_types=[str],
-                doc='xTB hamiltonian'
-                )
-
-        opt.add_option(
-                key='xTB_accuracy',
-                value=1.0,
-                required=False,
-                allowed_types=[float],
-                doc='xTB accuracy'
-                )
-
-        opt.add_option(
-                key='xTB_electronic_temperature',
-                value=300,
-                required=False,
-                allowed_types=[float],
-                doc='xTB electronic_temperature'
-                )
-
-        opt.add_option(
             key='solvent',
             value=None,
             required=False,
             allowed_types=[str],
-            doc='xTB solvent'
+            doc='solvent'
         )
 
         Lot._default_options = opt
@@ -250,17 +226,15 @@ class Lot(object):
             raise RuntimeError("Need to initialize LOT object")
 
         # Cache some useful atributes - other useful attributes are properties
-        self.currentCoords = manage_xyz.xyz_to_np(self.geom)
-        self.atoms = manage_xyz.get_atoms(self.geom)
         self.ID = self.options['ID']
         self.nproc = self.options['nproc']
         self.charge = self.options['charge']
+        self.solvent = self.options['solvent']
         self.node_id = self.options['node_id']
         self.lot_inp_file = self.options['lot_inp_file']
-        self.xTB_Hamiltonian = self.options['xTB_Hamiltonian']
-        self.xTB_accuracy = self.options['xTB_accuracy']
-        self.xTB_electronic_temperature = self.options['xTB_electronic_temperature']
-        self.solvent = self.options['solvent']
+
+        self.currentCoords = manage_xyz.xyz_to_np(self.geom)
+        self.atoms = manage_xyz.get_atoms(self.geom)
 
         # Bools for running
         self.hasRanForCurrentCoords = False
@@ -277,8 +251,10 @@ class Lot(object):
         # pytc? TODO
         self.options['job_data']['lot'] = self.options['job_data'].get('lot', None)
 
-        print(" making folder scratch/{:03}/{}".format(self.ID, self.node_id))
-        os.system('mkdir -p scratch/{:03}/{}'.format(self.ID, self.node_id))
+        # set the scratch dir
+        self.scratch_dir = f"scratch/{self.ID:03}/{self.node_id}"
+        print(f" making folder {self.scratch_dir}")
+        os.system(f"mkdir {self.scratch_dir}")
 
     @classmethod
     def from_options(cls, **kwargs):

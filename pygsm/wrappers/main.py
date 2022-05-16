@@ -47,6 +47,8 @@ def parse_arguments(verbose=True):
     parser.add_argument('-lot_inp_file', type=str, default=None,
                         help='external file to specify calculation e.g. qstart,gstart,etc. Highly package specific.',
                         required=False)
+    parser.add_arugment('-bagel_runpath', type=str, default=None,
+                        help='Path to script that runs bagel', required=False),
     parser.add_argument('-ID', default=0, type=int, help='string identification number (default: %(default)s)',
                         required=False)
     parser.add_argument('-num_nodes', type=int, default=11,
@@ -130,10 +132,6 @@ def parse_arguments(verbose=True):
 
     args = parser.parse_args()
 
-    if verbose:
-        print("what the fuck2")
-        print_msg()
-
     if args.nproc > 1:
         force_num_procs = True
         if verbose:
@@ -143,7 +141,6 @@ def parse_arguments(verbose=True):
     if force_num_procs:
         nproc = args.nproc
     else:
-        # nproc = get_nproc()
         try:
             nproc = int(os.environ['OMP_NUM_THREADS'])
         except:
@@ -163,6 +160,8 @@ def parse_arguments(verbose=True):
         'xTB_accuracy': args.xTB_accuracy,
         'xTB_electronic_temperature': args.xTB_electronic_temperature,
         'solvent': args.solvent,
+
+        'bagel_runpath': args.bagel_runpath,
 
         # PES
         'PES_type': args.pes_type,
