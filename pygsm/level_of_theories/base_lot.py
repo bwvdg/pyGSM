@@ -254,10 +254,11 @@ class Lot(object):
         # set the scratch dir
         self.scratch_dir = f"scratch/{self.ID:03}/{self.node_id}"
         print(f" making folder {self.scratch_dir}")
-        os.system(f"mkdir {self.scratch_dir}")
+        os.system(f"mkdir -p {self.scratch_dir}")
 
     @classmethod
     def from_options(cls, **kwargs):
+        print(kwargs)
         """ Returns an instance of this class with default options updated from values in kwargs"""
         return cls(cls.default_options().set_values(kwargs))
 

@@ -16,20 +16,28 @@ except:
     from base_lot import Lot
 
 
-class bagel_lot(Lot):
+class BAGEL(Lot):
     def __init__(self, options):
-        super(bagel_lot, self).__init__(options)
+        super(BAGEL, self).__init__(options)
         # get the input file
-        with open(self.lot_input_file, 'r') as bagel_infile:
+        with open(self.lot_inp_file, 'r') as bagel_infile:
           self.bagel_data = json.load(bagel_infile)
-        # get the save reference 
-        self.bagel_runpath = options.bagel_runpath
-        self.bagel_refpath = os.path.join(self.scratch_dir, 'bagel.archive')
-        self.bagel_inpath = os.path.join(self.scratch_dir, 'bagel.json')
-        self.bagel_outpath = os.path.join(self.scratch_dir, 'force.json')
-
+        # get file locations
+        self.bagel_runpath = options['bagel_runpath']
+        self.bagel_archive = options['bagel_archive']
+        self.bagel_inpath = options['bagel_inpath']
+        self.bagel_outpath = options['bagel_outpath']
 
     # given geom, mult, state, write input file
+
+    @classmethod
+    def default_options(cls, **kwargs):
+        bagel_opts = super(BAGEL, cls).default_options()
+        bagel_opts.add_option(key="bagel_runpath", required=True, value="", allowed_types=[str], doc='')
+        bagel_opts.add_option(key="bagel_archive", required=False, value="bagel.archive", allowed_types=[str], doc='')
+        bagel_opts.add_option(key="bagel_inpath", required=False, value="bagel.json", allowed_types=[str], doc='')
+        bagel_opts.add_option(key="bagel_outpath", required=False, value="force.json", allowed_types=[str], doc='')
+        return bagel_opts.copy()
 
     def set_geom(self, geom):
         for g in geom:
@@ -44,14 +52,14 @@ class bagel_lot(Lot):
 
       # check if bagel archive exists, and add the archive block if so
       load_ref = {'title': "load_ref", 'file': self.bagel_ref_path, 'nocompute': True}
-      if os.path.exists(os.path.join(self.bagel_ref_path)):
+      if path.exists(path.join(self.bagel_ref_path)):
           cur_bagel_data['bagel'].insert(0, load_ref)
 
       # update the geometry
       self.set_geom(geom)
 
       # write the input file
-      with open(bagel_input_path, 'w') as bagel_input_file
+      with open(bagel_input_path, 'w') as bagel_input_file:
           json.dump(cur_bagel_data, bagel_input_file)
 
     def run(self, geom, multiplicity, state, verbose=False):

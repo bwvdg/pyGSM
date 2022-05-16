@@ -16,6 +16,7 @@ from pygsm.coordinate_systems import Angle, DelocalizedInternalCoordinates, Dihe
 from pygsm.growing_string_methods import DE_GSM, SE_Cross, SE_GSM
 from pygsm.level_of_theories.ase import ASELoT
 from pygsm.level_of_theories.xtb_lot import xTB_lot
+from pygsm.level_of_theories.bagel import BAGEL
 from pygsm.optimizers import beales_cg, conjugate_gradient, eigenvector_follow, lbfgs
 from pygsm.potential_energy_surfaces import Avg_PES, PES, Penalty_PES
 from pygsm.utilities import elements, manage_xyz, nifty
@@ -47,7 +48,7 @@ def parse_arguments(verbose=True):
     parser.add_argument('-lot_inp_file', type=str, default=None,
                         help='external file to specify calculation e.g. qstart,gstart,etc. Highly package specific.',
                         required=False)
-    parser.add_arugment('-bagel_runpath', type=str, default=None,
+    parser.add_argument('-bagel_runpath', type=str, default=None,
                         help='Path to script that runs bagel', required=False),
     parser.add_argument('-ID', default=0, type=int, help='string identification number (default: %(default)s)',
                         required=False)
@@ -289,6 +290,12 @@ def create_lot(inpfileq: dict, geom):
             solvent=inpfileq['solvent'],
             **lot_options,
         )
+    if lot_name == "BAGEL":
+        return BAGEL.from_options(
+            bagel_runpath=inpfileq['bagel_runpath'],
+            solvent=inpfileq['solvent'],
+            **lot_options,
+        )
     else:
         est_package = importlib.import_module("pygsm.level_of_theories." + lot_name.lower())
         lot_class = getattr(est_package, lot_name)
@@ -360,8 +367,6 @@ def choose_optimizer(inpfileq: dict):
 
 
 def main():
-
-    print("WHAT THE FUCK!")
     # argument parsing and header
     inpfileq = parse_arguments(verbose=True)
 

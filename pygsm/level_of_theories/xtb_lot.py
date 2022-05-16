@@ -25,14 +25,23 @@ class xTB_lot(Lot):
         numbers = []
         E = elements.ElementData()
 
-        self.xTB_Hamiltonian = options.get('xTB_Hamiltonian', 'GFN2-xTB')
-        self.xTB_Hamiltonian = float(options.get('xTB_accuracy', 1.0))
-        self.xTB_Hamiltonian = float(options.get('xTB_electronic_temperature', 300))
+        self.xTB_Hamiltonian = options['xTB_Hamiltonian']
+        self.xTB_accuracy = options['xTB_accuracy']
+        self.xTB_electronic_temperature = options['xTB_electronic_temperature']
+
 
         for a in manage_xyz.get_atoms(self.geom):
             elem = E.from_symbol(a)
             numbers.append(elem.atomic_num)
         self.numbers = np.asarray(numbers)
+
+    @classmethod
+    def default_options(cls, **kwargs):
+        xtb_opts = super(xTB_lot, cls).default_options()
+        xtb_opts.add_option(key="xTB_Hamiltonian", required=False, value="GFN2-xTB", allowed_types=[str], doc='')
+        xtb_opts.add_option(key="xTB_accuracy", required=False, value=1.0, allowed_types=[float], doc='')
+        xtb_opts.add_option(key="xTB_electronic_temperature", required=True, value=300, allowed_types=[float], doc='')
+        return xtb_opts.copy()
 
     def run(self, geom, multiplicity, state, verbose=False):
 
