@@ -22,7 +22,7 @@ class BAGEL(Lot):
         super(BAGEL, self).__init__(options)
         # get the input file
         with open(self.lot_inp_file, 'r') as bagel_infile:
-          self.bagel_data = json.load(bagel_infile)
+            self.bagel_data = json.load(bagel_infile)
         # get file locations
         self.bagel_runpath = options['bagel_runpath']
         self.bagel_archive = path.join(self.scratch_dir, options['bagel_archive'])
@@ -45,7 +45,9 @@ class BAGEL(Lot):
     def set_geom(self, geom, bagel_data):
         for bagel_block in bagel_data['bagel']:
             if 'geometry' in bagel_block:
-              bagel_block['geometry'] = [{'atom': asym, 'xyz': [x, y, z]} for (asym, x, y, z) in geom]
+                bagel_block['geometry'] = [{'atom': asym, 'xyz': [x, y, z]} for (asym, x, y, z) in geom]
+                self.angstrom = bagel_block['angstrom']
+
 
     def write_input(self, geom):
       cur_bagel_data = deepcopy(self.bagel_data)
@@ -65,8 +67,6 @@ class BAGEL(Lot):
             bagel_outdata = json.load(bagel_gradfile)
             self.energy = bagel_outdata['energy']
             self.gradient = np.asarray([atom['xyz'] for atom in bagel_outdata['gradient']])
-        print(f"energy: {self.energy}")
-        print(f"gradient: {self.gradient}")
 
     def run(self, geom, multiplicity, state, verbose=False):
         
@@ -84,8 +84,9 @@ class BAGEL(Lot):
         # energy in hartree
         self._Energies[(multiplicity, state)] = self.Energy(self.energy, 'Hartree')
 
-        # grad in Hatree/Bohr
-        self._Gradients[(multiplicity, state)] = self.Gradient(self.gradient, 'Hartree/Bohr')
+        # grad 
+        gradunit = "Hartree/Angstrom" if self.angstrom else "Hartree/Bohr"
+        self._Gradients[(multiplicity, state)] = self.Gradient(self.gradient, gradunit)
 
         # write E to scratch
         self.write_E_to_file()
@@ -95,8 +96,9 @@ class BAGEL(Lot):
         #return res
 
 
-#if __name__ == "__main__":
-#
+if __name__ == "__main__":
+    pass
+
 #    geom = manage_xyz.read_xyz('../../data/ethylene.xyz')
 #    # geoms=manage_xyz.read_xyzs('../../data/diels_alder.xyz')
 #    # geom = geoms[0]

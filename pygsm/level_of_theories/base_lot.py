@@ -399,6 +399,8 @@ class Lot(object):
             if frozen_atoms is not None:
                 for a in frozen_atoms:
                     Gradient.value[a, :] = 0.
+            if Gradient.unit == "Hartree/Angstrom":
+                return Gradient.value
             if Gradient.unit == "Hartree/Bohr":
                 return Gradient.value * units.ANGSTROM_TO_AU  # Ha/bohr*bohr/ang=Ha/ang
             elif Gradient.unit == "kcal/mol/Angstrom":
