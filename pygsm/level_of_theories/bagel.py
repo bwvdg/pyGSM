@@ -1,11 +1,12 @@
 # standard library imports
 import sys
+import subprocess
+import json
 from os import path
+from copy import deepcopy
 
 # third party
 import numpy as np
-import json
-from copy import deepcopy
 
 # local application imports
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
@@ -26,14 +27,8 @@ class BAGEL(Lot):
         self.bagel_runpath = options['bagel_runpath']
         self.bagel_archive = path.join(self.scratch_dir, options['bagel_archive'])
         self.bagel_inpath = path.join(self.scratch_dir, options['bagel_inpath'])
+        self.bagel_gradpath = path.join(self.scratch_dir, options['bagel_gradpath'])
         self.bagel_outpath = path.join(self.scratch_dir, options['bagel_outpath'])
-
-        print(self.bagel_runpath)
-        print(self.bagel_archive)
-        print(self.bagel_inpath)
-        print(self.bagel_outpath)
-        print(self.scratch_dir)
-        
 
     # given geom, mult, state, write input file
 
@@ -43,54 +38,61 @@ class BAGEL(Lot):
         bagel_opts.add_option(key="bagel_runpath", required=True, value="", allowed_types=[str], doc='')
         bagel_opts.add_option(key="bagel_archive", required=False, value="bagel.archive", allowed_types=[str], doc='')
         bagel_opts.add_option(key="bagel_inpath", required=False, value="bagel.json", allowed_types=[str], doc='')
-        bagel_opts.add_option(key="bagel_outpath", required=False, value="force.json", allowed_types=[str], doc='')
+        bagel_opts.add_option(key="bagel_gradpath", required=False, value="force.json", allowed_types=[str], doc='')
+        bagel_opts.add_option(key="bagel_outpath", required=False, value="bagel.out", allowed_types=[str], doc='')
         return bagel_opts.copy()
 
-    def set_geom(self, geom):
-        for bagel_block in self.bagel_data:
-          for bagel_atom, coord in zip(geom, bagel_block.get('geometry', [])):
-            print(f"setting atom {bagel_atom.atom} xyz {bagel_atom['xyz']} to {coord}")
-            bagel_atom['xyz'] = coord
-        
-        pass
+    def set_geom(self, geom, bagel_data):
+        for bagel_block in bagel_data['bagel']:
+            if 'geometry' in bagel_block:
+              bagel_block['geometry'] = [{'atom': asym, 'xyz': [x, y, z]} for (asym, x, y, z) in geom]
 
     def write_input(self, geom):
-
       cur_bagel_data = deepcopy(self.bagel_data)
-
-      ## check if bagel archive exists, and add the archive block if so
-      #load_ref = {'title': "load_ref", 'file': self.bagel_ref_path, 'nocompute': True}
-      #if path.exists(path.join(self.bagel_ref_path)):
-      #    cur_bagel_data['bagel'].insert(0, load_ref)
-
       # update the geometry
-      self.set_geom(geom)
-
+      self.set_geom(geom, cur_bagel_data)
+      # check if bagel archive exists, and add the archive block if so
+      load_ref = {'title': "load_ref", 'file': self.bagel_archive, 'nocompute': True}
+      if path.exists(path.join(self.bagel_archive)):
+          cur_bagel_data['bagel'].insert(0, load_ref)
       # write the input file
-      #with open(bagel_input_path, 'w') as bagel_input_file:
-      #    json.dump(cur_bagel_data, bagel_input_file)
+      print(f"writing to bagel path: {self.bagel_inpath}")
+      with open(self.bagel_inpath, 'w') as bagel_infile:
+          json.dump(cur_bagel_data, bagel_infile, indent=2)
+
+    def read_output(self):
+        with open(self.bagel_gradpath, 'r') as bagel_gradfile:
+            bagel_outdata = json.load(bagel_gradfile)
+            self.energy = bagel_outdata['energy']
+            self.gradient = np.asarray([atom['xyz'] for atom in bagel_outdata['gradient']])
+        print(f"energy: {self.energy}")
+        print(f"gradient: {self.gradient}")
 
     def run(self, geom, multiplicity, state, verbose=False):
         
-        print("running bagel")
-        print(f"  bagel infile  {self.bagel_inpath}")
-        print(f"  bagel outfile {self.bagel_outpath}")
-        print(f"  bagel runpath {self.bagel_runpath}")
-        print(f"  bagel archive {self.bagel_archive}")
+        print("writing bagel input")
         self.write_input(geom)
 
+        # get energies
+        print("running bagel")
+        process = subprocess.Popen(self.bagel_runpath, cwd=self.scratch_dir, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        bagelout, bagelerr = process.communicate()
+        #print(f"bagelout: \n{bagelout}")
+        #print(f"bagelerr: \n{bagelerr}")
+        self.read_output()
+
         # energy in hartree
-        #self._Energies[(multiplicity, state)] = self.Energy(res.get_energy(), 'Hartree')
+        self._Energies[(multiplicity, state)] = self.Energy(self.energy, 'Hartree')
 
         # grad in Hatree/Bohr
-        #self._Gradients[(multiplicity, state)] = self.Gradient(res.get_gradient(), 'Hartree/Bohr')
+        self._Gradients[(multiplicity, state)] = self.Gradient(self.gradient, 'Hartree/Bohr')
 
         # write E to scratch
-        #self.write_E_to_file()
+        self.write_E_to_file()
 
-        res = None
+        #res = None
 
-        return res
+        #return res
 
 
 #if __name__ == "__main__":
