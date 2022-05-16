@@ -1,4 +1,5 @@
 *.pyc
+**/.*.swp
 .temp*
 *.pid
 *.molden

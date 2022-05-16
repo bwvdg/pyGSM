@@ -24,9 +24,16 @@ class BAGEL(Lot):
           self.bagel_data = json.load(bagel_infile)
         # get file locations
         self.bagel_runpath = options['bagel_runpath']
-        self.bagel_archive = options['bagel_archive']
-        self.bagel_inpath = options['bagel_inpath']
-        self.bagel_outpath = options['bagel_outpath']
+        self.bagel_archive = path.join(self.scratch_dir, options['bagel_archive'])
+        self.bagel_inpath = path.join(self.scratch_dir, options['bagel_inpath'])
+        self.bagel_outpath = path.join(self.scratch_dir, options['bagel_outpath'])
+
+        print(self.bagel_runpath)
+        print(self.bagel_archive)
+        print(self.bagel_inpath)
+        print(self.bagel_outpath)
+        print(self.scratch_dir)
+        
 
     # given geom, mult, state, write input file
 
@@ -40,27 +47,28 @@ class BAGEL(Lot):
         return bagel_opts.copy()
 
     def set_geom(self, geom):
-        for g in geom:
-            print(g)
+        for bagel_block in self.bagel_data:
+          for bagel_atom, coord in zip(geom, bagel_block.get('geometry', [])):
+            print(f"setting atom {bagel_atom.atom} xyz {bagel_atom['xyz']} to {coord}")
+            bagel_atom['xyz'] = coord
+        
         pass
 
     def write_input(self, geom):
-      self.bagel_template_path = ""
-      self.bagel_ref_path = ""
 
       cur_bagel_data = deepcopy(self.bagel_data)
 
-      # check if bagel archive exists, and add the archive block if so
-      load_ref = {'title': "load_ref", 'file': self.bagel_ref_path, 'nocompute': True}
-      if path.exists(path.join(self.bagel_ref_path)):
-          cur_bagel_data['bagel'].insert(0, load_ref)
+      ## check if bagel archive exists, and add the archive block if so
+      #load_ref = {'title': "load_ref", 'file': self.bagel_ref_path, 'nocompute': True}
+      #if path.exists(path.join(self.bagel_ref_path)):
+      #    cur_bagel_data['bagel'].insert(0, load_ref)
 
       # update the geometry
       self.set_geom(geom)
 
       # write the input file
-      with open(bagel_input_path, 'w') as bagel_input_file:
-          json.dump(cur_bagel_data, bagel_input_file)
+      #with open(bagel_input_path, 'w') as bagel_input_file:
+      #    json.dump(cur_bagel_data, bagel_input_file)
 
     def run(self, geom, multiplicity, state, verbose=False):
         
@@ -68,7 +76,8 @@ class BAGEL(Lot):
         print(f"  bagel infile  {self.bagel_inpath}")
         print(f"  bagel outfile {self.bagel_outpath}")
         print(f"  bagel runpath {self.bagel_runpath}")
-        print(f"  bagel refpath {self.bagel_refpath}")
+        print(f"  bagel archive {self.bagel_archive}")
+        self.write_input(geom)
 
         # energy in hartree
         #self._Energies[(multiplicity, state)] = self.Energy(res.get_energy(), 'Hartree')

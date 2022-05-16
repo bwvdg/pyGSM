@@ -258,7 +258,6 @@ class Lot(object):
 
     @classmethod
     def from_options(cls, **kwargs):
-        print(kwargs)
         """ Returns an instance of this class with default options updated from values in kwargs"""
         return cls(cls.default_options().set_values(kwargs))
 
