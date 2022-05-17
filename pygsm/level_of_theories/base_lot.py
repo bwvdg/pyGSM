@@ -252,9 +252,12 @@ class Lot(object):
         self.options['job_data']['lot'] = self.options['job_data'].get('lot', None)
 
         # set the scratch dir
-        self.scratch_dir = f"scratch/{self.ID:03}/{self.node_id}"
+        self.scratch_dir = self.get_scratch_dir(self.ID, self.node_id)
         print(f" making folder {self.scratch_dir}")
         os.system(f"mkdir -p {self.scratch_dir}")
+
+    def get_scratch_dir(self, ID, node_id)
+        return f"scratch/{ID:03}/{node_id}"
 
     @classmethod
     def from_options(cls, **kwargs):

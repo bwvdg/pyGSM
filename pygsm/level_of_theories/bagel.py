@@ -29,13 +29,17 @@ class BAGEL(Lot):
             self.bagel_data = json.load(bagel_infile)
         # get file locations
         self.bagel_runpath = options['bagel_runpath']
-        self.bagel_archivepath = os.path.join(self.scratch_dir, options['bagel_archive'] + ".archive")
+        self.bagel_archivepath = os.path.join(self.scratch_dir, options['bagel_archive'] + ".archive.0")
         self.bagel_archive = options['bagel_archive']
         self.bagel_inpath = os.path.join(self.scratch_dir, options['bagel_inpath'])
         self.bagel_gradpath = os.path.join(self.scratch_dir, options['bagel_gradpath'])
         self.bagel_outpath = os.path.join(self.scratch_dir, options['bagel_outpath'])
         self.bagel_errpath = os.path.join(self.scratch_dir, options['bagel_errpath'])
-
+        # find the archive path of a neighboring node
+        adjacent_node_id = self.node_id - 1 if self.node_id > 0 else 1 
+        adjacent_scratch_dir = self.get_scratch_dir(self.ID, adjacent_node_id)
+        self.adjacent_bagel_archivepath = os.path.join(adjacent_scratch_dir, self.bagel_archive)
+        # set an initial run index to label bagel output
         self.run_index = 0
 
     # given geom, mult, state, write input file
@@ -64,7 +68,11 @@ class BAGEL(Lot):
         self.set_geom(geom, cur_bagel_data)
         # check if bagel archive exists, and add the archive block if so
         load_ref = {'title': "load_ref", 'file': self.bagel_archive, 'nocompute': True}
-        if os.path.exists(self.bagel_archivepath) or os.path.exists(self.bagel_archivepath + '.0'):
+        if os.path.exists(self.bagel_archivepath):
+            cur_bagel_data['bagel'].insert(0, load_ref)
+        # check if the bagel archive from the adjacent node; copy over and add the blcok if soif so
+        elif os.path.exists(self.adjacent_bagel_archivepath):
+            shutil.copy2(self.adjacent_bagel_archivepath, self.bagel_archivepath)
             cur_bagel_data['bagel'].insert(0, load_ref)
         # write the input file
         with open(self.bagel_inpath, 'w') as bagel_infile:
