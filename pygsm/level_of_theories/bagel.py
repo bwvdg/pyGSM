@@ -5,6 +5,8 @@ import json
 import os
 import time
 
+from io import StringIO
+
 from copy import deepcopy
 
 # third party
@@ -68,24 +70,11 @@ class BAGEL(Lot):
         with open(self.bagel_inpath, 'w') as bagel_infile:
             json.dump(cur_bagel_data, bagel_infile, indent=2)
 
-    def write_output(self, outstring, errstring, rcode):
-        bagel_outpath = self.bagel_outpath + f".{self.run_index:03d}"
-        bagel_errpath = self.bagel_outpath + f".{self.run_index:03d}"
-        # write outpath and error
-        with open(bagel_outpath, 'w') as bagel_outfile:
-            bagel_outfile.write(outstring)
-        with open(bagel_errpath, 'w') as bagel_errfile:
-            bagel_errfile.write(errstring)
-        if rcode != 0:
-            raise Exception(f"Bagel error, rcode {rcode}: \n{errstring}")
-
     def read_grad(self):
         with open(self.bagel_gradpath, 'r') as bagel_gradfile:
             bagel_outdata = json.load(bagel_gradfile)
             self.energy = bagel_outdata['energy']
             self.gradient = np.asarray([atom['xyz'] for atom in bagel_outdata['gradient']])
-
-        
 
     def run(self, geom, multiplicity, state, verbose=False):
         
@@ -95,15 +84,21 @@ class BAGEL(Lot):
         
         # run bagel
         time_start = time.time()
-        process = subprocess.Popen(self.bagel_runpath, cwd=self.scratch_dir, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        bagelout, bagelerr = process.communicate()
-        rcode = process.returncode
-        self.write_output(bagelout.decode('utf-8'), bagelerr.decode('utf-8'), rcode)
-        self.read_grad()
+        bagel_outpath = self.bagel_outpath + f".{self.run_index:03d}"
+        bagel_errpath = self.bagel_outpath + f".{self.run_index:03d}"
+        with open(bagel_outpath, 'w') as bagel_outfile, open(bagel_errpath, 'w') as bagel_errfile:
+            process = subprocess.Popen(self.bagel_runpath, cwd=self.scratch_dir, shell=True, stdout=bagel_outfile, stderr=bagel_errfile)
+        process.communicate()
         bagel_time = time.time() - time_start
+
+        # check if successful, read output, and report summary
+        rcode = process.returncode
+        if rcode != 0:
+            raise Exception(f"Bagel error, rcode {rcode}: \n{errstring}")
+        self.read_grad()
         print(f"Finished BAGEL on node {self.node_id}. Runtime: {bagel_time}, energy: {self.energy}, gradmag: {np.linalg.norm(self.gradient)}")
 
-        # energy and gradients
+        # collect energy and gradients
         self._Energies[(multiplicity, state)] = self.Energy(self.energy, 'Hartree')
         self._Gradients[(multiplicity, state)] = self.Gradient(self.gradient, gradunit)
         # write E to scratch
