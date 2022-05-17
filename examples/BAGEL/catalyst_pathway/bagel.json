@@ -1,0 +1,28 @@
+{ "bagel" : [
+
+{
+  "title" : "molecule",
+  "basis" : "xtb",
+  "angstrom" : true,
+  "geometry" : []
+},
+
+{
+  "title": "force",
+  "export_json": true,
+  "method": [
+    {
+    "title" : "xtb",
+    "solvation": true,
+    "solvent": "benzene", 
+    "charge": 1,
+    "dispersion": true
+    }
+  ]
+},
+{
+  "title": "save_ref",
+  "file": "bagel"
+}
+
+]}
