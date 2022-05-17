@@ -256,7 +256,7 @@ class Lot(object):
         print(f" making folder {self.scratch_dir}")
         os.system(f"mkdir -p {self.scratch_dir}")
 
-    def get_scratch_dir(self, ID, node_id)
+    def get_scratch_dir(self, ID, node_id):
         return f"scratch/{ID:03}/{node_id}"
 
     @classmethod

@@ -4,6 +4,7 @@ import subprocess
 import json
 import os
 import time
+import shutil
 
 from io import StringIO
 
@@ -38,7 +39,7 @@ class BAGEL(Lot):
         # find the archive path of a neighboring node
         adjacent_node_id = self.node_id - 1 if self.node_id > 0 else 1 
         adjacent_scratch_dir = self.get_scratch_dir(self.ID, adjacent_node_id)
-        self.adjacent_bagel_archivepath = os.path.join(adjacent_scratch_dir, self.bagel_archive)
+        self.adjacent_bagel_archivepath = os.path.join(adjacent_scratch_dir, self.bagel_archive + ".archive.0")
         # set an initial run index to label bagel output
         self.run_index = 0
 
@@ -68,10 +69,13 @@ class BAGEL(Lot):
         self.set_geom(geom, cur_bagel_data)
         # check if bagel archive exists, and add the archive block if so
         load_ref = {'title': "load_ref", 'file': self.bagel_archive, 'nocompute': True}
+        print(f" archive path: {self.bagel_archivepath}, adjacent archive path: {self.adjacent_bagel_archivepath}")
         if os.path.exists(self.bagel_archivepath):
+            print(f" found {self.bagel_archivepath}, loading")
             cur_bagel_data['bagel'].insert(0, load_ref)
-        # check if the bagel archive from the adjacent node; copy over and add the blcok if soif so
+        # check if the bagel archive from the adjacent node; copy over and add the blcok if so
         elif os.path.exists(self.adjacent_bagel_archivepath):
+            print(f" found previous archive: {self.adjacent_bagel_archivepath}, loading")
             shutil.copy2(self.adjacent_bagel_archivepath, self.bagel_archivepath)
             cur_bagel_data['bagel'].insert(0, load_ref)
         # write the input file
