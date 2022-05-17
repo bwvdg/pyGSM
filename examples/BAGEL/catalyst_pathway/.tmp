@@ -1,0 +1,637 @@
+[
+  {
+    "additionalCapabilities": null,
+    "applicationProfile": null,
+    "availabilitySet": null,
+    "billingProfile": {
+      "maxPrice": -1.0
+    },
+    "capacityReservation": null,
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": false,
+        "storageUri": null
+      }
+    },
+    "evictionPolicy": "Deallocate",
+    "extendedLocation": null,
+    "extensionsTimeBudget": "PT1H30M",
+    "fqdns": "",
+    "hardwareProfile": {
+      "vmSize": "Standard_HC44rs",
+      "vmSizeProperties": null
+    },
+    "host": null,
+    "hostGroup": null,
+    "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/virtualMachines/compute0",
+    "identity": null,
+    "licenseType": null,
+    "location": "eastus",
+    "macAddresses": "00-0D-3A-57-83-20",
+    "name": "compute0",
+    "networkProfile": {
+      "networkApiVersion": null,
+      "networkInterfaceConfigurations": null,
+      "networkInterfaces": [
+        {
+          "deleteOption": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_slurm/providers/Microsoft.Network/networkInterfaces/compute_nic_0",
+          "primary": true,
+          "resourceGroup": "beatrice_slurm"
+        }
+      ]
+    },
+    "osProfile": {
+      "adminPassword": null,
+      "adminUsername": "beatrice",
+      "allowExtensionOperations": true,
+      "computerName": "compute0",
+      "customData": null,
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "enableVMAgentPlatformUpdates": false,
+        "patchSettings": {
+          "assessmentMode": "ImageDefault",
+          "patchMode": "ImageDefault"
+        },
+        "provisionVmAgent": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCbmx+Zfs5q8MJ0/Cao4rGfoMKnIUebVzSUMhGQNGwMhOZ3m0pzEnb2BgD/Qj9bcKA1P4z8ekq4aYfkLHYXisnS4U2s3xT5cXUm0LdUOjkaL5+jJjeWT5BwU3rLBeOsqFSS+s+3e3nvHfKXXDOfIMXN0q4VmFUYXxiZLSFShLZoE6pyHUXhQG7koT/guqAaOso+F2dBhb27+gJS6111kTKo1ITlQK+rJayRjwW7KgPKd3jjqRxb5QmLtdVlXgPpJCsWT5cahG5uZU9QYy/TLV5RUoFx5lYWxTca28SiMymGu3zp8buk6a09UGCmvQCM7Y+xHLs05p+SSjaVewZuckY14NVRrOee9lptS4ahxbZw0Jbgv/graZmIp3pBAUxT08fOq0VDOMRav5B+CX677+5Oors1I7zpEvTgv344+ydAZ9XV5X+Vfax43kosQOm4d4Q8I6Ml8FkLFw9muAC4e8JCWxOxcozGHfV0rKirw5BovwZlK3v20ku2w7XfKT55/anBXsMvTjjKJVjbBQYpvjTGXfjO+AX0METdcsdqmDdmPJl8Xw8zjLquPrAbZSLSGmbx+ruCUwDhmzZdQuxWgYxG1t7KQfHS8DSCFB93je+KTtXAijHHAxyOH3brtg8NLSoMyvHvRY07YDHqVT+hoxgXnl84O2l/UVkCE91lq/zwMw==\n",
+              "path": "/home/beatrice/.ssh/authorized_keys"
+            }
+          ]
+        }
+      },
+      "requireGuestProvisionSignal": true,
+      "secrets": [],
+      "windowsConfiguration": null
+    },
+    "plan": null,
+    "platformFaultDomain": null,
+    "powerState": "VM deallocated",
+    "priority": "Spot",
+    "privateIps": "10.0.2.5",
+    "provisioningState": "Succeeded",
+    "proximityPlacementGroup": null,
+    "publicIps": "",
+    "resourceGroup": "BEATRICE_SLURM",
+    "resources": null,
+    "scheduledEventsProfile": null,
+    "securityProfile": null,
+    "storageProfile": {
+      "dataDisks": [],
+      "imageReference": {
+        "communityGalleryImageId": null,
+        "exactVersion": null,
+        "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_images/providers/Microsoft.Compute/images/beatrice_cluster_HC44rs",
+        "offer": null,
+        "publisher": null,
+        "resourceGroup": "beatrice_images",
+        "sharedGalleryImageId": null,
+        "sku": null,
+        "version": null
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "deleteOption": "Detach",
+        "diffDiskSettings": null,
+        "diskSizeGb": null,
+        "encryptionSettings": null,
+        "image": null,
+        "managedDisk": {
+          "diskEncryptionSet": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/disks/compute_disk_0",
+          "resourceGroup": "BEATRICE_SLURM",
+          "securityProfile": null,
+          "storageAccountType": null
+        },
+        "name": "compute_disk_0",
+        "osType": "Linux",
+        "vhd": null,
+        "writeAcceleratorEnabled": false
+      }
+    },
+    "tags": {
+      "projectid": "beatrice_slurm",
+      "resource_type": "slurm_compute",
+      "user": "beatrice"
+    },
+    "timeCreated": "2022-05-05T15:12:14.054636+00:00",
+    "type": "Microsoft.Compute/virtualMachines",
+    "userData": null,
+    "virtualMachineScaleSet": null,
+    "vmId": "81776bf7-01dc-4962-9919-f5e0203c048a",
+    "zones": null
+  },
+  {
+    "additionalCapabilities": null,
+    "applicationProfile": null,
+    "availabilitySet": null,
+    "billingProfile": {
+      "maxPrice": -1.0
+    },
+    "capacityReservation": null,
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": false,
+        "storageUri": null
+      }
+    },
+    "evictionPolicy": "Deallocate",
+    "extendedLocation": null,
+    "extensionsTimeBudget": "PT1H30M",
+    "fqdns": "",
+    "hardwareProfile": {
+      "vmSize": "Standard_HC44rs",
+      "vmSizeProperties": null
+    },
+    "host": null,
+    "hostGroup": null,
+    "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/virtualMachines/compute1",
+    "identity": null,
+    "licenseType": null,
+    "location": "eastus",
+    "macAddresses": "00-0D-3A-56-24-85",
+    "name": "compute1",
+    "networkProfile": {
+      "networkApiVersion": null,
+      "networkInterfaceConfigurations": null,
+      "networkInterfaces": [
+        {
+          "deleteOption": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_slurm/providers/Microsoft.Network/networkInterfaces/compute_nic_1",
+          "primary": true,
+          "resourceGroup": "beatrice_slurm"
+        }
+      ]
+    },
+    "osProfile": {
+      "adminPassword": null,
+      "adminUsername": "beatrice",
+      "allowExtensionOperations": true,
+      "computerName": "compute1",
+      "customData": null,
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "enableVMAgentPlatformUpdates": false,
+        "patchSettings": {
+          "assessmentMode": "ImageDefault",
+          "patchMode": "ImageDefault"
+        },
+        "provisionVmAgent": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCzDOj/NDmRuSexyNC4WFAomNEgFq+Yj607ynvDTjrAtnYVVPWkJl5iH9IEya/InGfgv0LIqC+yVtZtY2RIBFjyF56yy99ugJSVeXfYrs2hOoBEq0GDbv9ycnCQsHfCWyFtakEArwhG/a+GAuW6Dm691SjPkNufp4BxS+LD9T+rBoZ4/TCzD4bzc2a5YidDFoQOYuLpZ3AxOnneLbxTzVHanavDUoWzxzreTBAK2ztUa3OhQHNB+BnDhC0CwPx5BtzzcIhHYrwHkv2kNy1Lt7sgYrQH6VEjx04CG7rYZfVCnJvpWgXiYvBtkn07OM9yImavCXvbmA39eegp01kR0MlMCyT/MEjk+J4QhDPl82slt7tHGXYYALS5tuc2VOYgLS+BGJWXmO/1q1nlwR/KgRYeaBsL2AyKSQX2Vn812B/uRpkTcBCt+2mmbmvZZIkPH1Qr2kiu1qVvVPMmZOTONCdqnxe5Yk4xPzkID6YcgpREdegMVghFX7UX/xybRKlR6tIlzOXIL9yPEAY/Ct+vhMs51AKE5EtTSFaDi4uDg6i4T5Hf7HTrz2lqSgU2NHlQk45je82zHaT6SE6M/+WLhWi3Zk3GfrybS2GkHaIK9t8T6vpJfyRIicWdjAH/0s2grTUiCtJDOslbNIjoB/oztzQRPM57XnpFgbHyxmBpcfpedQ==\n",
+              "path": "/home/beatrice/.ssh/authorized_keys"
+            }
+          ]
+        }
+      },
+      "requireGuestProvisionSignal": true,
+      "secrets": [],
+      "windowsConfiguration": null
+    },
+    "plan": null,
+    "platformFaultDomain": null,
+    "powerState": "VM deallocated",
+    "priority": "Spot",
+    "privateIps": "10.0.2.7",
+    "provisioningState": "Succeeded",
+    "proximityPlacementGroup": null,
+    "publicIps": "",
+    "resourceGroup": "BEATRICE_SLURM",
+    "resources": null,
+    "scheduledEventsProfile": null,
+    "securityProfile": null,
+    "storageProfile": {
+      "dataDisks": [],
+      "imageReference": {
+        "communityGalleryImageId": null,
+        "exactVersion": null,
+        "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_images/providers/Microsoft.Compute/images/beatrice_cluster_HC44rs",
+        "offer": null,
+        "publisher": null,
+        "resourceGroup": "beatrice_images",
+        "sharedGalleryImageId": null,
+        "sku": null,
+        "version": null
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "deleteOption": "Detach",
+        "diffDiskSettings": null,
+        "diskSizeGb": null,
+        "encryptionSettings": null,
+        "image": null,
+        "managedDisk": {
+          "diskEncryptionSet": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/disks/compute_disk_1",
+          "resourceGroup": "BEATRICE_SLURM",
+          "securityProfile": null,
+          "storageAccountType": null
+        },
+        "name": "compute_disk_1",
+        "osType": "Linux",
+        "vhd": null,
+        "writeAcceleratorEnabled": false
+      }
+    },
+    "tags": {
+      "projectid": "beatrice_slurm",
+      "resource_type": "slurm_compute",
+      "user": "beatrice"
+    },
+    "timeCreated": "2022-05-05T15:12:13.820222+00:00",
+    "type": "Microsoft.Compute/virtualMachines",
+    "userData": null,
+    "virtualMachineScaleSet": null,
+    "vmId": "e1c6ffe2-547c-4076-9ded-3ca5332db604",
+    "zones": null
+  },
+  {
+    "additionalCapabilities": null,
+    "applicationProfile": null,
+    "availabilitySet": null,
+    "billingProfile": {
+      "maxPrice": -1.0
+    },
+    "capacityReservation": null,
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": false,
+        "storageUri": null
+      }
+    },
+    "evictionPolicy": "Deallocate",
+    "extendedLocation": null,
+    "extensionsTimeBudget": "PT1H30M",
+    "fqdns": "",
+    "hardwareProfile": {
+      "vmSize": "Standard_HC44rs",
+      "vmSizeProperties": null
+    },
+    "host": null,
+    "hostGroup": null,
+    "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/virtualMachines/compute2",
+    "identity": null,
+    "licenseType": null,
+    "location": "eastus",
+    "macAddresses": "00-0D-3A-56-2F-39",
+    "name": "compute2",
+    "networkProfile": {
+      "networkApiVersion": null,
+      "networkInterfaceConfigurations": null,
+      "networkInterfaces": [
+        {
+          "deleteOption": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_slurm/providers/Microsoft.Network/networkInterfaces/compute_nic_2",
+          "primary": true,
+          "resourceGroup": "beatrice_slurm"
+        }
+      ]
+    },
+    "osProfile": {
+      "adminPassword": null,
+      "adminUsername": "beatrice",
+      "allowExtensionOperations": true,
+      "computerName": "compute2",
+      "customData": null,
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "enableVMAgentPlatformUpdates": false,
+        "patchSettings": {
+          "assessmentMode": "ImageDefault",
+          "patchMode": "ImageDefault"
+        },
+        "provisionVmAgent": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDoWWJwnkTOlW6MqeciaPVDQvNhYk6IyJQ9DQoikCXG/ydQ/fTXps4uf5Hb11zcYFaBH2Tmi8Ew5dQSyAtLygd8mLPDv4ec7hvGXbP7fleqLBnK58+u7hkIyssDL68yb2rCxiFiKykypLfB5RqRPwOQ59XaLqVRdy755nFA8lsjdOhI5YuVyUPvoNVVbpBik5cl0BGnlsvBHUJoovHB6xDHGHhKjMIlbh8rPZfuHyNPVOc869H7QNZcF5a54hJSd/rAIsQCIWFnWKn2ze4y9wL01ndG2WKT4YAEIKCbQ1Ao+vxLoYpXcpU4AbC2CYo8EJkG9IPF+LFhaoACHtEBA70vy2LdZH+6spPCJgMBi2faNfYxfNh9czHqPuu6pPI5dCU2Dsl9pteR2eZEamdreDsjgEZW25jScVZmfFoC3ffcE3c7rSjeM4rnshoF3kc7pbvSzyEB8orgGgReuuW3IkcQCsyXTRP3UyF4aNcqij9UQVVky6UMRGgZ7OwhHjLh08gkcSdwffneqVp1e6urxNlxEHa+8mm/Z9spRaTxFc6bLy/aj/Fe85n2K2gPpgk4CLSVY5RJRy20fR5Vshx+TfdEwxwl/pbufKGYmCNLvOatvO+ygivvfE3/LIwbE8FdL5d1Lhfb2+RXwddKDp9yMJP/cn+iv8LnTg4DKXutElujgQ==\n",
+              "path": "/home/beatrice/.ssh/authorized_keys"
+            }
+          ]
+        }
+      },
+      "requireGuestProvisionSignal": true,
+      "secrets": [],
+      "windowsConfiguration": null
+    },
+    "plan": null,
+    "platformFaultDomain": null,
+    "powerState": "VM deallocated",
+    "priority": "Spot",
+    "privateIps": "10.0.2.6",
+    "provisioningState": "Succeeded",
+    "proximityPlacementGroup": null,
+    "publicIps": "",
+    "resourceGroup": "BEATRICE_SLURM",
+    "resources": null,
+    "scheduledEventsProfile": null,
+    "securityProfile": null,
+    "storageProfile": {
+      "dataDisks": [],
+      "imageReference": {
+        "communityGalleryImageId": null,
+        "exactVersion": null,
+        "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_images/providers/Microsoft.Compute/images/beatrice_cluster_HC44rs",
+        "offer": null,
+        "publisher": null,
+        "resourceGroup": "beatrice_images",
+        "sharedGalleryImageId": null,
+        "sku": null,
+        "version": null
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "deleteOption": "Detach",
+        "diffDiskSettings": null,
+        "diskSizeGb": null,
+        "encryptionSettings": null,
+        "image": null,
+        "managedDisk": {
+          "diskEncryptionSet": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/disks/compute_disk_2",
+          "resourceGroup": "BEATRICE_SLURM",
+          "securityProfile": null,
+          "storageAccountType": null
+        },
+        "name": "compute_disk_2",
+        "osType": "Linux",
+        "vhd": null,
+        "writeAcceleratorEnabled": false
+      }
+    },
+    "tags": {
+      "projectid": "beatrice_slurm",
+      "resource_type": "slurm_compute",
+      "user": "beatrice"
+    },
+    "timeCreated": "2022-05-05T15:12:13.726475+00:00",
+    "type": "Microsoft.Compute/virtualMachines",
+    "userData": null,
+    "virtualMachineScaleSet": null,
+    "vmId": "d2fd17fc-9900-4db8-8c25-7cf9e2b36920",
+    "zones": null
+  },
+  {
+    "additionalCapabilities": null,
+    "applicationProfile": null,
+    "availabilitySet": null,
+    "billingProfile": {
+      "maxPrice": -1.0
+    },
+    "capacityReservation": null,
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": false,
+        "storageUri": null
+      }
+    },
+    "evictionPolicy": "Deallocate",
+    "extendedLocation": null,
+    "extensionsTimeBudget": "PT1H30M",
+    "fqdns": "",
+    "hardwareProfile": {
+      "vmSize": "Standard_F2s_v2",
+      "vmSizeProperties": null
+    },
+    "host": null,
+    "hostGroup": null,
+    "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/virtualMachines/control0",
+    "identity": null,
+    "licenseType": null,
+    "location": "eastus",
+    "macAddresses": "00-0D-3A-54-C9-80",
+    "name": "control0",
+    "networkProfile": {
+      "networkApiVersion": null,
+      "networkInterfaceConfigurations": null,
+      "networkInterfaces": [
+        {
+          "deleteOption": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_slurm/providers/Microsoft.Network/networkInterfaces/control_nic_0",
+          "primary": true,
+          "resourceGroup": "beatrice_slurm"
+        }
+      ]
+    },
+    "osProfile": {
+      "adminPassword": null,
+      "adminUsername": "beatrice",
+      "allowExtensionOperations": true,
+      "computerName": "control0",
+      "customData": null,
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "enableVMAgentPlatformUpdates": false,
+        "patchSettings": {
+          "assessmentMode": "ImageDefault",
+          "patchMode": "ImageDefault"
+        },
+        "provisionVmAgent": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCh/6+2kf+M3idwPxrqwYx+RpTkJ37H76HCXtGxxsPAyjdp7iAbxMV5TJUKds0f90o5KGnRSOSAvTt5qpReCu4a1dc3OEzUia5q0226U3f/ny2dRYMy23VaI0ilt6Wue8FH4Jn4FwrqfGe98oFjMWMJ3eWZolZphGixzQQpDxpQ3vWP9Hlztq+GkVIxCrNs931wi4haxztbz/Xby2Sn4czcMxcb/TUimdKD32aHmfTflBwQzNtgqCe3BbMGdDpdrqzQMmnCpRiJyTLIl9PtGC7YjGKLC69BP95ntmggDfO7/nIKKLX//4aGnq1AgxxyEI+DaqsWS9a4wOGfH4XglfbjH2mT/AlV4qaubuoolIeGfQlS/gxtLTOD+7NsvqxohgGrXewps3zQksnq1YoVVKJP8pktL3+Pt3nmJpF8RyJqN/0l8KoU0LJDk8J0htSEZSxsXQ/o3dMBM3QWzDna2pdNu2l/NifvC9mfZV1Ux14W8ANobbleJoy031zaL82oNtCxylpIot1sJkHXPJq6U/yz/B8tjeGaMbVzvjSa2WuGUZwODJmUBigtFGmUsFbvT78KBYkkVZgfRfLt69Y/18Fcko0A3c/JH2v19UzLXOE87Ba7CNsI7/O4QYDe/BBO8uwDnp9J0mlFztOhB+hFONzl5zbzecMfCUi84o2tzcoQwQ==\n",
+              "path": "/home/beatrice/.ssh/authorized_keys"
+            }
+          ]
+        }
+      },
+      "requireGuestProvisionSignal": true,
+      "secrets": [],
+      "windowsConfiguration": null
+    },
+    "plan": null,
+    "platformFaultDomain": null,
+    "powerState": "VM running",
+    "priority": "Spot",
+    "privateIps": "10.0.2.8",
+    "provisioningState": "Succeeded",
+    "proximityPlacementGroup": null,
+    "publicIps": "168.62.165.46",
+    "resourceGroup": "BEATRICE_SLURM",
+    "resources": null,
+    "scheduledEventsProfile": null,
+    "securityProfile": null,
+    "storageProfile": {
+      "dataDisks": [],
+      "imageReference": {
+        "communityGalleryImageId": null,
+        "exactVersion": null,
+        "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_images/providers/Microsoft.Compute/images/beatrice_cluster-dev_F2sv2",
+        "offer": null,
+        "publisher": null,
+        "resourceGroup": "beatrice_images",
+        "sharedGalleryImageId": null,
+        "sku": null,
+        "version": null
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "deleteOption": "Detach",
+        "diffDiskSettings": null,
+        "diskSizeGb": 30,
+        "encryptionSettings": null,
+        "image": null,
+        "managedDisk": {
+          "diskEncryptionSet": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/disks/control_disk_0",
+          "resourceGroup": "BEATRICE_SLURM",
+          "securityProfile": null,
+          "storageAccountType": "Standard_LRS"
+        },
+        "name": "control_disk_0",
+        "osType": "Linux",
+        "vhd": null,
+        "writeAcceleratorEnabled": false
+      }
+    },
+    "tags": {
+      "projectid": "beatrice_slurm",
+      "resource_type": "slurm_overhead",
+      "user": "beatrice"
+    },
+    "timeCreated": "2022-05-05T15:12:15.007765+00:00",
+    "type": "Microsoft.Compute/virtualMachines",
+    "userData": null,
+    "virtualMachineScaleSet": null,
+    "vmId": "8ad6e1ca-4fcb-4bb5-8201-41c065e50e5f",
+    "zones": null
+  },
+  {
+    "additionalCapabilities": null,
+    "applicationProfile": null,
+    "availabilitySet": null,
+    "billingProfile": {
+      "maxPrice": -1.0
+    },
+    "capacityReservation": null,
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": false,
+        "storageUri": null
+      }
+    },
+    "evictionPolicy": "Deallocate",
+    "extendedLocation": null,
+    "extensionsTimeBudget": "PT1H30M",
+    "fqdns": "",
+    "hardwareProfile": {
+      "vmSize": "Standard_F2s_v2",
+      "vmSizeProperties": null
+    },
+    "host": null,
+    "hostGroup": null,
+    "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/BEATRICE_SLURM/providers/Microsoft.Compute/virtualMachines/database0",
+    "identity": null,
+    "licenseType": null,
+    "location": "eastus",
+    "macAddresses": "00-0D-3A-14-A4-49",
+    "name": "database0",
+    "networkProfile": {
+      "networkApiVersion": null,
+      "networkInterfaceConfigurations": null,
+      "networkInterfaces": [
+        {
+          "deleteOption": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_slurm/providers/Microsoft.Network/networkInterfaces/database_nic_0",
+          "primary": true,
+          "resourceGroup": "beatrice_slurm"
+        }
+      ]
+    },
+    "osProfile": {
+      "adminPassword": null,
+      "adminUsername": "beatrice",
+      "allowExtensionOperations": true,
+      "computerName": "database0",
+      "customData": null,
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "enableVMAgentPlatformUpdates": false,
+        "patchSettings": {
+          "assessmentMode": "ImageDefault",
+          "patchMode": "ImageDefault"
+        },
+        "provisionVmAgent": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDCJLyjZctE4XTAfYUrTQn+f4gFtG6q5H/yHnjDMwZuVzDFmQKqZp6TOwMRsSm3Bq0QjoaoGabaxKhld8jvr3IPWnPh3Ly3CAOx/am+vxRI+GnLmO5oxNqsIqxHfMbyUxc4aRmm9BJTVY/bik92pq0W26OmywFX8peSd1lmBEMU5co76Onjm7si5jiYReICYPv0Dne9H/NOhs5mmWx8L8+6ryd/9QJBK+yhTcqJ42ZKxWI7HZ3MRRzjIjnCnMF7y83UgEC65w+irVEb42AXQ+qQI1JjG43RcC61mhHkSLJ+wKuKVk9pOZeYr2u2vFCL6K52IonjNGR/uTg6SeLbuB2x1Rc5e5KvQhzLHMu/74tLix8QIKxbGirlqt0WtVyE8UQk5fl8vC+KC8Qs+KHXnrF3+mzi9O7dkdBtYd1qjIK142XU66OArG5jg4mbi4066ApPGnQrQwEAjIKaSp8NRRj+y1MterXEOazo0akt6VW15ztxUFTR3YoQVqcLRKJNj5MDJDzocfsmy8EJwfn5zgzWmrRDWgQQ27oFcQxyyzU1ge8y37MhUWmgXvbZAahDNUm+j95VFlNa8Kq4KhQboz+rSIvsdPYkqpGUFH0Io1GHMDX3r+oNi4KKoqjquZwdbAPPimA/wbjqvWM0EfrRMy6BUsewaVmun2xfkm5F8tmGbw==\n",
+              "path": "/home/beatrice/.ssh/authorized_keys"
+            }
+          ]
+        }
+      },
+      "requireGuestProvisionSignal": true,
+      "secrets": [],
+      "windowsConfiguration": null
+    },
+    "plan": null,
+    "platformFaultDomain": null,
+    "powerState": "VM deallocated",
+    "priority": "Spot",
+    "privateIps": "10.0.2.4",
+    "provisioningState": "Succeeded",
+    "proximityPlacementGroup": null,
+    "publicIps": "",
+    "resourceGroup": "BEATRICE_SLURM",
+    "resources": null,
+    "scheduledEventsProfile": null,
+    "securityProfile": null,
+    "storageProfile": {
+      "dataDisks": [],
+      "imageReference": {
+        "communityGalleryImageId": null,
+        "exactVersion": null,
+        "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_images/providers/Microsoft.Compute/images/beatrice_cluster_F2sv2",
+        "offer": null,
+        "publisher": null,
+        "resourceGroup": "beatrice_images",
+        "sharedGalleryImageId": null,
+        "sku": null,
+        "version": null
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "deleteOption": "Detach",
+        "diffDiskSettings": null,
+        "diskSizeGb": null,
+        "encryptionSettings": null,
+        "image": null,
+        "managedDisk": {
+          "diskEncryptionSet": null,
+          "id": "/subscriptions/1005ff9b-9fa2-4d9e-9dfd-3046dcc1263d/resourceGroups/beatrice_slurm/providers/Microsoft.Compute/disks/database_disk_0",
+          "resourceGroup": "beatrice_slurm",
+          "securityProfile": null,
+          "storageAccountType": null
+        },
+        "name": "database_disk_0",
+        "osType": "Linux",
+        "vhd": null,
+        "writeAcceleratorEnabled": false
+      }
+    },
+    "tags": {
+      "projectid": "beatrice_slurm",
+      "resource_type": "slurm_overhead",
+      "user": "beatrice"
+    },
+    "timeCreated": "2022-05-05T15:12:09.570247+00:00",
+    "type": "Microsoft.Compute/virtualMachines",
+    "userData": null,
+    "virtualMachineScaleSet": null,
+    "vmId": "56160235-eeb2-4a54-98ae-604bffef0d41",
+    "zones": null
+  }
+]
