@@ -32,7 +32,7 @@ class BAGEL(Lot):
         self.bagel_runpath = options['bagel_runpath']
         self.bagel_archivepath = os.path.join(self.scratch_dir, options['bagel_archive'] + ".archive.0")
         self.bagel_archive = options['bagel_archive']
-        self.bagel_inpath = os.path.join(self.scratch_dir, options['bagel_inpath'])
+        self.bagel_inpath = os.path.join(self.scratch_dir, self.lot_inp_file)
         self.bagel_gradpath = os.path.join(self.scratch_dir, options['bagel_gradpath'])
         self.bagel_outpath = os.path.join(self.scratch_dir, options['bagel_outpath'])
         self.bagel_errpath = os.path.join(self.scratch_dir, options['bagel_errpath'])
@@ -50,7 +50,8 @@ class BAGEL(Lot):
         bagel_opts = super(BAGEL, cls).default_options()
         bagel_opts.add_option(key="bagel_runpath", required=True, value="", allowed_types=[str], doc='')
         bagel_opts.add_option(key="bagel_archive", required=False, value="bagel", allowed_types=[str], doc='')
-        bagel_opts.add_option(key="bagel_inpath", required=False, value="bagel.json", allowed_types=[str], doc='')
+        #bagel_opts.add_option(key="bagel_inpath", required=False, value="bagel.json", allowed_types=[str], doc='')
+
         bagel_opts.add_option(key="bagel_gradpath", required=False, value="force.json", allowed_types=[str], doc='')
         bagel_opts.add_option(key="bagel_outpath", required=False, value="bagel.out", allowed_types=[str], doc='')
         bagel_opts.add_option(key="bagel_errpath", required=False, value="bagel.err", allowed_types=[str], doc='')
