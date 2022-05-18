@@ -103,7 +103,7 @@ class BAGEL(Lot):
         # check if successful, read output, and report summary
         rcode = process.returncode
         if rcode != 0:
-            raise Exception(f"Bagel error, rcode {rcode}: \n{errstring}")
+            raise Exception(f"Bagel error, rcode {rcode}. Check {bagel_errpath} for details.")
         self.read_grad()
         print(f"Finished BAGEL on node {self.node_id}. Runtime: {bagel_time}, energy: {self.energy}, gradmag: {np.linalg.norm(self.gradient)}")
 
