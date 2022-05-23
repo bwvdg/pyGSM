@@ -90,7 +90,6 @@ class BAGEL(Lot):
         
         print(f"Running BAGEL on node {self.node_id}.")
         self.write_input(geom)
-        gradunit = "Hartree/Angstrom" if self.angstrom else "Hartree/Bohr"
         
         # run bagel
         time_start = time.time()
@@ -110,7 +109,7 @@ class BAGEL(Lot):
 
         # collect energy and gradients
         self._Energies[(multiplicity, state)] = self.Energy(self.energy, 'Hartree')
-        self._Gradients[(multiplicity, state)] = self.Gradient(self.gradient, gradunit)
+        self._Gradients[(multiplicity, state)] = self.Gradient(self.gradient, "Hartree/Bohr")
         # write E to scratch
         self.run_index += 1
         self.write_E_to_file()
